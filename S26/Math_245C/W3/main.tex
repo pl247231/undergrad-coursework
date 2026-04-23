@@ -1,0 +1,270 @@
+\documentclass[11pt]{article}
+
+\newcommand{\cnum}{Math 245C}
+\newcommand{\ced}{Spring 2026}
+\newcommand{\ctitle}[4]{\title{\vspace{-0.5in}\cnum, \ced\\week #1: #2}\author{\vspace{-0.35in}\\#3, #4}}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames,svgnames,table,hyperref]{xcolor}
+\usepackage{amsmath, amsfonts}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\renewcommand*{\theenumi}{\alph{enumi}}
+\renewcommand*\labelenumi{(\theenumi)}
+\renewcommand*{\theenumii}{\roman{enumii}}
+\renewcommand*\labelenumii{\theenumii.}
+\newcommand{\notiff}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{"}$\hidewidth\cr$\iff$}}}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{header}{HTML}{205459}
+\definecolor{solution}{HTML}{204d52}
+
+\newcommand{\solution}[1]{{{\textcolor{header}{Solution:} \textcolor{solution}{#1}}}}
+\setlist[enumerate]{label=(\alph*)}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+
+\begin{document}
+\ctitle{\#1}{}{Asher Christian}{}
+\date{}
+\maketitle
+
+\section{Monday}
+Reminder: $ \mathcal{X}$ is a locally compact hausdorff space.
+Exercise:
+Let  $\mu$ be a Radon measure on $ \mathcal{X}$ and set
+\[
+    I_\mu[f] = \int_{ \mathcal{X}}^{} f d\mu \quad \forall f \in C_c( \mathcal{X})
+\] 
+Show that the following are equivalent
+\begin{enumerate}
+    \item $\mu[ \mathcal{X}] < +\infty$
+    \item $I_\mu$ has a linear continuous extension to $C( \mathcal{X})$
+\end{enumerate}
+Solution: We only show that $(ii) \implies (i)$ since the other implication is easy.
+Assume  $(ii)$ (why cant we just take $f = 1$).
+By the riesz representation theorem and the existence of the measure there, since $ \mathcal{X}$ is open
+$\mu[X] = \sup_{f} \{I_\mu[f] : f \in C_c( \mathcal{X}, [0,1]), spt(f) \subset \mathcal{X}\}  \le ||I_\mu||$
+
+\section{Theorem}
+\emph{
+    If $I \in (C_0( \mathcal{X}))^{*}$ then there exists $I^{\pm} \in (C_0( \mathcal{X}))^{*}$ positive
+    such that $I = I^{+} - I^{-}$
+}
+Look for example
+\[
+\int_{}^{}f d\mu_1 - \int_{}^{}f d\mu_2
+\] 
+and assume for instance that $\mu_1$ and $\mu_2$ are finite with same total mass, then this is equivalent to
+\[
+\int_{}^{}(f+1) d(\mu_1 + \nu) - \int_{}^{}fd(\mu_2 + \nu)
+\] 
+for all $\nu$ Borel probability measure on  $ \mathcal{X}$. Therefore we have no uniqueness.
+If we assume that $\mu_1 \perp \mu_2$ then then we get uniqueness\\
+Proof:  part I. Definition of $I^{+}_0 : C_0( \mathcal{X}, [0,+\infty))$.
+For $f \in C_0( \mathcal{X}, [0,+\infty))$ we set
+\[
+    I_0^{+}(f) = \sup_{g}\left\{ I[g] : 0 \le g \le f, g \in C_0( \mathcal{X})\right\}
+\] 
+since $ g \equiv 0$ and $g \equiv f$ satisfy  $0 \le g \le f$ we have  
+\[
+    (1) \quad I_0^{+}(f) \ge 0, I(f)
+\] 
+we have
+\[
+    |I(g)| \le ||g||_{C_0( \mathcal{X})} ||I|| \le ||f||_{C_0( \mathcal{X})}||I||
+\] 
+and so
+\[
+    I^{+}_0(f) \le ||f||_{C_0( \mathcal{X})} ||I||
+\] 
+Claim 1: $I_0^{+}$ is "linear" on $ C_0( \mathcal{X},[0,+\infty))$.
+Proof, let $c \ge 0$  $f_1,f_2 \in C_0( \mathcal{X}, [0,+\infty))$. If
+$g_1, g_2 \in C_0( \mathcal{X})$ and $0 \le g_1 \le f_1, 0 \le g_2 \le f_2$ then $0 \le g_1 + g_2 \le f_1 + f_2$ and
+so $I_0^{+}(f_1 + f_2) \ge I(g_1+g_2) = I(g_1) + I(g_2)$. Maximizing over $g_1,g_2$ satisfying the inequality,
+we have
+\[
+I_0^{+}(f_1 + f_2) \ge I_0^{+}(f_1) + I_0^{+}(f_2)
+\] 
+For any $\epsilon > 0$ choose $g_1 \in C_0( \mathcal{X})$ such that $0 \le g \le f_1+f_2$ 
+\[
+    I_0^{+}(f_1 + f_2) \le I(g) + \epsilon
+\] 
+Define
+\[
+    g_1 = \max\{0, g-f_2\} \quad g_2 = g-g_1
+\] 
+since 
+\[
+g - f_2 \le f_1
+\] 
+we have $g_1 \le f_1$ and $0 \le g_2$
+and $g_2 \le f_2$ since $g_2 = g - g +f_2$ or $g_2 = g-0$ when $g \le f_2$
+It is very clear that $0 \le g_1 \le f_1$ and $0 \le g_2 \le f_2$ and  $g_1,g_2 \in C_0( \mathcal{X})$
+and so
+\[
+I_0^{+}(f_1) + I_0^{+}(f_2) \ge I(g_1) + I(g_2) = I(g_1 + g_2) = I(g) \ge I_0^{+}(f_1 + f_2) - \epsilon
+\] 
+And so
+\[
+    I_0^{+}(f_1 + f_2) = I_0^{+}(f_1) + I_0^{+}(f_2)
+\] 
+one checks that $I_0^{+}(cf) = cI_0^{+}(f)$.\\
+Part II:  Definition of $I$. Given  $f \in C_0 ( \mathcal{X})$ we set
+\[
+    f^{\pm } = \max\{ \pm f, 0\}
+\] 
+note that  $f = f^{+} - f^{-}$ and $|f| = f^{+} + f^{-}$ and so
+$f^{\pm} \in C_0(\mathcal{X})$.
+We set
+\[
+I^{+}(f) = I_0^{+}(f^{+}) - I_0^{+}(f^{-})
+\] 
+and
+\[
+I^{-}(f) = I^{+}(f) - I(f)
+\] 
+Claim 2:  If $f = g - h, g,h \in C_0 ( \mathcal{X},[0,+\infty))$ 
+then $I^{+}_0(g) - I_0^{+}(h) = I_0^{+}(f^{+}) - I_0^{+}(f^{-})$.
+Proof of claim 2: $g-h = f = f^{+} - f^{-}$  so
+\[
+g + f^{-} = f^{+} + h \implies I_0^{+}(g + f^{-}) = I_0^{+}(f^{+} + h)
+\] 
+\[
+\implies I_0^{+}(g) + I_0^{+}(f^{-1}) =  I_0^{+}(f^{+}) + I_0^{+}(h)
+\] 
+Claim 3: $I^{+}$ and $I^{-}$ are linear.
+Proof of claim 3: It suffices to show that $I^{+}(f)$ is linear\\
+Claim 4:: $I^{\pm}$ are continuous and positive.
+Proof of claim 4: If $f \ge 0$  $I^{+}(f) = I_0^{+}(f) \ge 0$
+we have
+\[
+    |I^{+}(f)| \le |I_0^{+}(f^{+})| + |I_0^{+}(f^{-})| \le 2||f||_{C( \mathcal{X})}||I||
+\] 
+This alslows us to show that
+\[
+    |I^{-}(f)| \le 3||f||_{C( \mathcal{X})} ||I||
+\] 
+It remains to show that $I^{+}(f) \ge I(f)$ if $f \ge 0$ which we showed
+
+\section{Wednesday}
+Reminder: $ \mathcal{X}$ is a Locally compact hausdorff
+\begin{enumerate}
+    \item If $I \in (C_0( \mathcal{X}))^{*}$ then there exist $I^{\pm} \in C_0( \mathcal{X})^{*}$ such that
+        $I = I^{+} - I^{-}$ and $I^{+}, I^{-}$ are positive linear functions
+    \item If $J: C_c( \mathcal{X}) \to \mathbb{R}$ is linear and positive there exists a unique radon
+        measure $\mu$ on $ \mathcal{X}$ such that
+        \[
+        J(f)  = \int_{ \mathcal{X}}^{}f d\mu
+        \] 
+        for all $f \in C_0( \mathcal{X})$.
+        If $J$ extends to a linear continuous function on  $ C_0( \mathcal{X})$ then
+        $ \mu[ \mathcal{X}] < +\infty$
+\end{enumerate}
+(A) Conclusion. If $I $ is as in  $(a)$ then there exist  $\mu_1, \mu_2$ finite radon measure on $ \mathcal{X}$
+such that
+\[
+I(f) = \int_{ \mathcal{X}}^{}f d\mu_1 - \int_{ \mathcal{X}}^{}f d\mu_2
+\] 
+for all $f \in C_c( \mathcal{X})$.
+Notation: set $ M( \mathcal{X}) = \{ \mu_1 - \mu_2 : \mu_1,\mu_2 \text{ finite radon measures on $X$ }\}$ 
+If $\mu \in M ( \mathcal{X})$ we call $\mu$ a signed radon measure.
+Jordan decomposition: Let $\mu \in M( \mathcal{X})$. Set
+\[
+    \mu^{+}(E) = \sup_{B}\{ \mu[B]: B \subset E \text{ Borel}\}
+\] 
+and set
+\[
+    \mu^{-1}[E] = \sup_{B} \{-\mu[B] : B \subset E \text{ borel}\}
+\] 
+We have that $\mu^{\pm}$ are finite Radon measure
+on $ \mathcal{X}$ and $\mu = \mu^{+} - \mu^{-}$ and $\mu^{+} \perp \mu^{-}$. We set
+\[
+    |\mu| = \mu^{+} + \mu^{-} \qquad ||\mu||  = |\mu|[X]
+\] 
+Let $S \subset \mathcal{X}$ be a Borel set such that $\mu^{+}[ \mathcal{X} \setminus S] = 0 = \mu^{-}[S]$ and define
+\[
+    \sigma_\mu = 1_{S} - 1_{ \mathcal{X} \setminus S}
+\] 
+then if $f \in C_0 ( \mathcal{X})$ then
+\[
+    (1) \quad  \int_{ \mathcal{X}}^{}f\sigma_\mu |\mu|(dx) = \int_{S} f |\mu|(dx) - \int_{ S^{c}}^{}f |\mu|(dx) = \int_{S}^{}f \mu^{+}(dx) - \int_{ S^{c}}^{}f \mu^{-1}(dx)
+\] 
+\[
+= \int_{ \mathcal{X}}^{}f \mu^{+}(dx) - \int_{ \mathcal{X}}^{}f\mu^{-}(dx) = \int_{ \mathcal{X}}^{}f d\mu
+\] 
+Exercise B : 
+Let $L(\mu)[f] = \int_{ \mathcal{X}}^{}f d\mu$
+Show that $||\mu|| = \sup_f\{L(\mu)[f]: ||f|| \le 1, f \in C_{0}( \mathcal{X})\} = ||L(\mu)||$
+And $||\cdot||$ is a norm on $ M( \mathcal{X})$
+\section{Theorem (Riesz Representation Theorem) Part 2}
+The map $L : M( \mathcal{X}) \to C_0( \mathcal{X})^{*}$ is an isometric isomorphism.
+Proof:
+WTS $L $ is one-one . Suppose  $\mu,\nu  \in M( \mathcal{X})$ and $L(\mu) = L(\nu)$ this means
+\[
+\int_{ \mathcal{X}}^{}f d\mu = \int_{ \mathcal{X}}^{}f d\nu \quad \forall f \in C_0( \mathcal{X})
+\] 
+This means that
+\[
+\int_{ \mathcal{X}}^{}f (\mu^{+} + \nu^{-})(dx) = \int_{ \mathcal{X}}^{}f(\nu^{+} + \mu^{-})(dx) \quad \forall f \in C_c( \mathcal{X})
+\] 
+but by the riesz representation theorem part 1 we have that $\mu^{+} + \nu^{-} = \nu^{+} + \nu^{-}$.
+L is onto $C_0( \mathcal{X})^{*}$ this is seen by our conclusion $(A)$.
+By Exercise B, $L$ is an isometry. It remains to check that if  $\alpha, \beta \in \mathbb{R}$
+and $\mu,\nu \in M( \mathcal{X})$ then $L(\alpha \mu + \beta \nu)(f) = \alpha L(\mu)(f) + \beta L(\nu)(f)$ for all $f \in C_0( \mathcal{X})$
+\[
+\int_{ \mathcal{X}}^{}f(\alpha \mu + \beta \nu)(dx) = \alpha \int_{ \mathcal{X}}^{}f d\mu + \beta \int_{ \mathcal{X}}^{}fd\nu
+\] 
+Now, let us solve the exercise B.
+If $f \in C_0( \mathcal{X})$, by $1$, 
+ \[
+     \int_{ \mathcal{X}}^{}f \mu(dx) = \int_{ \mathcal{X}}^{}f \sigma_\mu |\mu|(dx) \le ||f||_{C( \mathcal{X})} |\mu|[ \mathcal{X}]
+\] 
+Since
+\[
+    |L(\mu)| = \sup_{f \in C_0 ( \mathcal{X})} \{L(\mu)(f): ||f||_{ C( \mathcal{X})} \le 1\}
+\] 
+we conclude that $||L(\mu)|| \le ||\mu||$. 
+Let $\epsilon > 0$ since $\sigma_\mu \in L^2(|\mu|) = \overline{C_0( \mathcal{X})}^{L^{2}}$ there exists $(f_n)_n \subset C_0 ( \mathcal{X})$ such that
+$||f_n - \sigma_\mu||_{L_2(|\mu|)} = 0$ take the cutoff function $\phi$ which is lipschitz 1 and $|\phi( \sigma_\mu) - \phi(f_n)| \le |\sigma_\mu - f_n|$ but $\phi(\sigma_\mu) = \sigma(\mu)$ so $\phi(f_n) \to \sigma(\mu)$.
+Since $| \sigma_\mu| \le 1$ we can assume without loss of generality that $||f_n|| \le 1$.
+We have
+\[
+||\mu|| = \int_{ \mathcal{X}}^{}|\mu|(dx) = \lim_{n\to \infty} \int_{ \mathcal{X}}^{}\sigma_\mu f_n |\mu|(dx) = \lim_{n\to \infty}L(\mu)(f_n)
+\] 
+\[
+\le ||L(\mu)||
+\] 
+since we have
+\[
+\int_{}^{}|f_n - \sigma_\mu|^2 = \int_{}^{}(f_n^2 + \sigma_\mu^2 - 2 f_n\sigma_\mu) |\mu|
+\] 
+
+
+\end{document}

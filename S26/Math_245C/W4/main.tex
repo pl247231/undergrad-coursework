@@ -1,0 +1,309 @@
+\documentclass[11pt]{article}
+
+\newcommand{\cnum}{Math 245C}
+\newcommand{\ced}{Spring 2026}
+\newcommand{\ctitle}[4]{\title{\vspace{-0.5in}\cnum, \ced\\week #1: #2}\author{\vspace{-0.35in}\\#3, #4}}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames,svgnames,table,hyperref]{xcolor}
+\usepackage{amsmath, amsfonts}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\renewcommand*{\theenumi}{\alph{enumi}}
+\renewcommand*\labelenumi{(\theenumi)}
+\renewcommand*{\theenumii}{\roman{enumii}}
+\renewcommand*\labelenumii{\theenumii.}
+\newcommand{\notiff}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{"}$\hidewidth\cr$\iff$}}}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{header}{HTML}{205459}
+\definecolor{solution}{HTML}{204d52}
+
+\newcommand{\solution}[1]{{{\textcolor{header}{Solution:} \textcolor{solution}{#1}}}}
+\setlist[enumerate]{label=(\alph*)}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+
+\begin{document}
+\ctitle{\#1}{}{Asher Christian}{}
+\date{}
+\maketitle
+
+\section{Monday}
+COnvolutions:
+$p,q,r \in [1,+\infty]$ are such that
+\[
+\frac{1}{p} + \frac{1}{q} + \frac{1}{r} = 2
+\] 
+If $ p \in [1,+\infty], p' = \frac{p}{p-1}$.\\
+If $f, g \in C_c( \mathbb{R}^{d})$, we 
+recall that if $x \in \mathbb{R}^{d}$ 
+\[
+f * g(x) = \int_{ \mathbb{R}^{d}}^{}f(x-y)g(y)dy
+\] 
+If $\alpha \in [1,+\infty]$, $f \in L^{\alpha}( \mathbb{R}^{d})$ and $g \in L^{\alpha'}( \mathbb{R}^{d)}$ then
+\[
+    \int_{ \mathbb{R}^{d}}^{}|fg|dx \le ||f||_{L^{\alpha}}||g||_{L^{\alpha'}}
+\] 
+via Hölder inequality.\\
+Exercise: Let $pq,\dots,p_n \in [1,+\infty]$ be such that
+\[
+\frac{1}{p_1} + \frac{1}{p_2} + \dots + \frac{1}{p_n} = 1
+\] 
+If $f_i \in L^{p_i}( \mathbb{R}^{d})$ $i = 1,\dots,n$ then
+ \[
+     ||f_1 \dots f_n||_{L^{1}} \le ||f||_{L^{p_1}}||f_2||_{L^{p_2}}\dots||f_n||_{L^{p_n}}
+\] 
+solution.
+By induction on $n$
+assume  $n = 3$
+ \[
+\frac{1}{p_1} + \frac{1}{p_2} + \frac{1}{p_3} = 1 = \frac{1}{p_1} + \frac{1}{p^{'}_1}
+\] 
+where
+\[
+\frac{1}{p^{'}_1} = \frac{1}{p_2} + \frac{1}{p_3}
+\] 
+we have
+\[
+    \int_{ \mathbb{R}^{d}}^{}|f_1f_2f_3|dx \le ||f_1||_{L^{p_1}} ||f_2f_3||_{L^{p'_1}}
+\] 
+\[
+\int_{ \mathbb{R}^{d}}^{}|f_2|^{p_1^{'}}|f_3|^{p_1^{'}}dx \le \int_{ \mathbb{R}^{d}}^{}(|f_2|^{p_1^{'}})^{\frac{p_2}{p_1^{'}}})^{\frac{p_1^{'}}{p_2}} \left( \int_{ \mathbb{R}^{d}}^{}(|f_3|^{p_1^{'}})^{\frac{p_3}{p_1^{'}}}dx\right)^{\frac{p_1^{'}}{p_3}}
+\] 
+\[
+    = ||f_2||_{L^{p_2}}^{p_1^{'}}||f_3||_{L^{p_3}}^{p_1^{'}}
+\] 
+combining, we conclude.
+
+\section{Theorem} Generalized Young's Inequality\\
+If $f \in L^{p}( \mathbb{R}^{d}), g \in L^{q}( \mathbb{R}^{d}), h \in L^{r}( \mathbb{R}^{d})$ then
+\[
+    (3) \quad    \int_{ \mathbb{R}^{d}}^{}|f||g*h|dx \le C_{pqr}||f||_{L^{p}}||g||_{L^{q}}||h||_{L^{r}}
+\] 
+and Lieb found that $C_{pqr} < 1$.
+if you write
+\[
+    ||f||_{L^{p}} \le 1 \implies \int_{ \mathbb{R}^{d}}^{}|Gf|dx = ||G||_{L^{p'}}
+\] 
+given $G$ you take  $f = \frac{G|G|^{p'-2}}{\lambda}$ 
+This is telling su that
+\[
+    ||g*h||_{L^{p'}} \le ||g||_{L^{q}} ||h||_{L^{r}}
+\] 
+where
+\[
+\frac{1}{q} + \frac{1}{r} = 1 + \frac{1}{p'}
+\] 
+Proof: Assume $f, g, h \ge 0$, set
+ \[
+\alpha(x,y) = f(x)^{\frac{p}{r'}}g(x-y)^{\frac{q}{r'}}
+\] 
+\[
+\beta(x,y) = g(x-y)^{\frac{q}{p'}} h(y)^{\frac{r}{p'}} 
+\] 
+\[
+\gamma(x,y) = f(x)^{\frac{p}{q'}}h(y)^{\frac{r}{q'}}
+\] 
+so
+\[
+\alpha(x,y)\beta(x,y)\gamma(x,y) = f(x)^{\frac{p}{r'}+\frac{p}{q'}}g(x-y)^{?}h(y)^{?}
+\] 
+\[
+\frac{1}{p'} + \frac{1}{q'} + \frac{1}{r'} = 1 - \frac{1}{p} + 1 - \frac{1}{q} + 1 - \frac{1}{r} = 3 -2 = 1
+\] 
+so
+\[
+p(\frac{1}{r'} + \frac{1}{q'}) = p(1-\frac{1}{p'}) = p(\frac{1}{p}) = 1
+\] 
+Thus
+\[
+\int_{ \mathbb{R}^{d}}^{}f(x) g * h(x)dx = \int_{  \mathbb{R}^{d}}^{}f(x) \int_{ \mathbb{R}^{d}}^{}g(x-y)h(y)dy
+\] 
+hence
+\[
+    (4) \quad   ||f g*h||_{L^{q}} = \int_{ \mathbb{R}^{2d}}^{}\alpha(x,y)\beta(x,y)\gamma(x,y)dxdy \le ||\alpha||_{L^{r'}}||\beta||_{L^{p'}}||\gamma||_{L^{q'}}
+\] 
+But
+\[
+    (5) \quad   ||\alpha||_{L^{r'}}^{r'} = \int_{ \mathbb{R}^{2d}}^{}f(x)^{p}g(x-y)^{q}dxdy
+\] 
+by fubini this is equal to 
+\[
+    \int_{ \mathbb{R}^{d}}^{}f(x)^{p}dx \int_{ \mathbb{R}^{d}}^{}g(x-y)^{q}dy = \int_{ \mathbb{R}^{d}}^{}f(x)^{p}\int_{ \mathbb{R}^{d}}^{}g(z)^{q}dz = ||f||_{L^{p}}^{p}||g||_{L^{q}}^{q}
+\] 
+by change of variable\\
+Similarly,
+\[
+    ||\beta||_{L^{p'}}^{p'} = ||g||_{L^{q}}^{q}||h||_{L^{r}}^{r} \quad ||\gamma||_{L^{q'}}^{q'} = ||f||_{L^{p}}^{p}||h||_{L^{r}}^{r}
+\] 
+This together with 4 and five implies that
+\[
+    ||f g * h||_{L^{1}} \le ||f||_{L^{p}}^{\frac{p}{r'}}||g||_{L^{q}}^{\frac{q}{r'}}||g||_{L^{q}}^{\frac{q}{p'}} ||h||_{L^{r}}^{\frac{r}{p'}}||f||_{L^{p}}^{\frac{p}{q'}}||h||_{L^{r}}^{\frac{r}{q'}}
+\] 
+since
+\[
+\frac{p}{r'} + \frac{q}{r'} = 1 ,\dots
+\] 
+this concludes the proof
+\section{Corollary} Corollary 1
+\[
+    ||g * h||_{L^{p'}} \le ||g||_{L^{q}}||h||_{L^{r}}
+\] 
+Corollary 2
+If $\alpha \in (1,+\infty)$, $f \in L^{\alpha} ( \mathbb{R}^{d}$ and $g \in L^{\alpha'}( \mathbb{R}^{d})$.
+Then $f * g \in C_0( \mathbb{R}^{d})$\\
+Proof: Choose $(f_n)_n, (g_n)_n \subset C_c^{\infty}( \mathbb{R}^{d})$ such that
+\[
+    \lim_{n\to \infty}||f-f_n||_{L^{\alpha}} + ||g - g_n||_{L^{\alpha'}} = 0
+\] 
+Note that $spt(f_n * g_n) \subset \overline{\{x+y: x \in spt(f_n),y \in spt(g_n)\}}$.
+We have %why? 
+\[
+    ||f*g - f_n * g_n||_{L^{\infty}} \le ||f * (g - g_n)||_{L^{\infty}} + ||(f-f_n) * g_n||_{L^{\infty}}
+\] 
+\[
+    \le ||f||_{L^{\alpha}}||g-g_n||_{L^{\alpha'}} + ||f-f_n||_{L^{\alpha}}||g_n||_{L^{\alpha'}} \to 0
+\] 
+tuhs
+\[
+    (f_n * g_n)_n
+\] 
+converges uniformly to $f * g$ and since each  $f_n * g_n \in C_c( \mathbb{R}^{d})$ we must have $f * g \in C_0( \mathbb{R}^{d})$
+\section{Wednesday}
+\begin{enumerate}
+    \item 
+        \[
+            \mathbb{N}_0 = \{0\} \cup \mathbb{N}
+        \] 
+        If $\alpha = (\alpha_1,\dots,\alpha_d) \in \mathbb{N}_0^{d}$, then $ |\alpha| = \alpha_1 + \dots + \alpha_d$
+        and
+        \[
+            \alpha! = \Pi_{j=1}^{d}\alpha_j!
+        \] 
+    \item If $f\in C^{\infty}( \mathbb{R}^{d})$ and $\partial^{\alpha}f = \frac{\partial^{\alpha_1}}{\partial x_1^{\alpha_1}} \dots \frac{\partial^{\alpha_d}}{\partial x_d^{\alpha_d}} f$ 
+        and
+        \[
+        x^{\alpha} = x_1^{\alpha_1}\dots x_d^{\alpha_d} \quad x \in \mathbb{R}^{d}
+        \] 
+        and
+        \[
+        ||x||_2^2 = x_1^2 + \dots + x_d^2
+        \] 
+    \item If $N \in \mathbb{N}_0$ then
+        \[
+            |f|_{N,\alpha} = \sup_{x \in \mathbb{R}^{d}} (1+|x|)^{N} |\partial^{\alpha}f|
+        \] 
+        this ensures that
+        \[
+           |\partial^{\alpha} f(x)|  \le \frac{|f|_{N,\alpha}}{(1 + |x|)^{N}} 
+        \] 
+        Observe, for instance that
+        \[
+            |f|_{N,1,0,\dots,0} = 0 \iff \frac{\partial f}{\partial x_1}(x_1,\dots,x_d) = 0 \iff f \equiv f(x_2,\dots,x_d)
+        \] 
+        We define the Schwartz space to be 
+        \[
+            S( \mathbb{R}^{d}) = \{f \in C^{\infty}( \mathbb{R}^{d}) : |f|_{N,\alpha} < +\infty \quad \forall N \in \mathbb{N}_0, \alpha \in \mathbb{N}_0^{d}\}
+        \] 
+\end{enumerate}
+Definition: Let $(p_\alpha)_{\alpha \in I}$ be a family of semi-norms on a vector space $ \mathcal{X}$. The topological space
+generated by the sets
+\[
+    U_{\alpha,\epsilon}(x) = \{y \in \mathcal{X} : p_\alpha(y-x) < \epsilon\}
+\] 
+is called the space generated  by $(p_\alpha)_{\alpha \in I}$.
+Remark: Let $(p_\alpha)_\alpha$ be a family of seminorms on a vector space $ \mathcal{X}$
+and let $\tau$ be the topology generated by  $(p_\alpha)_{\alpha \in I}$
+\begin{enumerate}
+    \item $(X, \tau)$ is a hausdorff space iff for every $x,y \in \mathcal{X}$ such that $x \ne y$
+        there exists   $ N \in \mathbb{N}_0$ and $\alpha \in \mathbb{N}_0^{d}$ such that 
+        \[
+        p_\alpha(x-y) \ne 0
+        \] 
+    \item 
+        If $ ( \mathcal{X}, \tau)$ is a Hausdorff and $ I$ is countable
+        then $( X, \tau)$ is metrizable: If  $I = \{\beta_n : n \in \mathbb{N}\}$
+        the distance
+        \[
+            d(x,y) = \sum_{n=1}^{\infty}\frac{p_{\beta_n}(x-y)}{1+ p_{\beta_n}(x-y)} \frac{1}{2^{n}}
+        \] 
+\end{enumerate}
+Definition: A Fréchet space is a topological vector space which a complete hausdorff space
+generated by a family  of semi norms and is metrizable
+\\
+Exercise: Show that $(S( \mathbb{R}^{d}), (|\cdot |_{N,\alpha})_{N,\alpha})$ is a Fréchet space
+solution: Homework assignment \#3.1.
+The main task is completeness. Assume $(f_n)_n$ is a cauchy sequence so that for each
+$\alpha$
+\[
+ (\partial^{\alpha}f_n)_n 
+\] 
+converges to $g_\alpha$.
+Show that $g_\alpha = \partial^{\alpha}f$ where $f = g(0,\dots,0)$\\
+Theorem:  Fore very $d \in \mathbb{N}$ there exists $c_d > 0$ such that
+for any  $N \in \mathbb{N}_0$ and $\alpha \in \mathbb{N}_0^{d}$ we have
+\[
+    |f * g|_{N,\alpha} < c_d |f|_{N,\alpha} |g|_{N+d+1,0}
+\] 
+we will see that $c_d = \int_{}^{}\frac{dy}{(1+|y|)^{d+\epsilon}}$ with $\epsilon > 0$, we can just set $\epsilon = 1$.
+Note that
+\[
+    (1) \quad 1 + |x| \le 1 + |x-y| + |y| \le (1 + |x-y|)(1+|y|)
+\] 
+hence
+\[
+    (1+|x|)^{N} |\partial^{\alpha}(f * g)| = (1 + |x|)^{N}|(\partial^{\alpha}f * g)(x)|
+\] 
+\[
+= \int_{ \mathbb{R}^{d}}^{}(1 + |x|)^{N} \partial^{\alpha}f(x-y)g(y)dy
+\] 
+by (1)
+\[
+\le \int_{ \mathbb{R}^{d}}^{} (1 + |x-y|)^{N}|\partial^{\alpha}f(x-y)|(1+|y|)^{N}|g(y)| dy
+\] 
+\[
+    \le |f|_{N,\alpha} \int_{ \mathbb{R}^{d}}^{}(1+|y|)^{N}g(y)dy = |f|_{N,\alpha} \int_{ \mathbb{R}^{d}}^{}(1+|y|)^{N+d+1} \frac{1}{(1 + |y|)^{d+1}} |g(y)dy
+\] 
+\[
+    \le |f|_{N,\alpha} |g|_{(N+d+1),0} c_d
+\] 
+let
+\[
+    c_d = \int_{ 0}^{+\infty} \frac{r^{d-1}}{(1+r)^{d+1}} \mathcal{H}^{d-1} ( S^{d-1})dr
+\] 
+\[
+\hat f(\xi) = \int_{ \mathbb{R}^{d}}^{}e^{-2\pi i x \xi}f(x)dx
+\] 
+\[
+\check g = \int_{ \mathbb{R}^{d}}^{}e^{2\pi i x \xi} g(\xi) d\xi = \hat f(-x)
+\] 
+
+
+\end{document}

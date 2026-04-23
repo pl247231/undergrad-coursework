@@ -228,9 +228,7 @@ Let us prove the result when $|f_i| = t_i1_{A_i}$ we have for $\alpha > 0$ and $
  \[
      \lambda_{f_i}(\alpha) = \mu\{ \frac{\alpha}{t_i} < 1_{A_i}\} = 
      \begin{cases}
-         0 & \alpha \ge t_i\\
-         \mu[A_i] & \alpha < t_i
-     \end{cases}
+         0 & \alpha \ge t_i\\ \mu[A_i] & \alpha < t_i \end{cases}
 \] 
 Thus,
 \[
@@ -268,6 +266,82 @@ L^{d}(\Lambda Q_r(a)) = (2r |\lambda_1|) \dots (2r |\lambda_d|) = |det \Lambda| 
 \[
 \implies L^{d}(\Lambda E) = |det \Lambda| L^{d}(E)
 \] 
+
+\section{Friday}
+Fact(1) From Homework 2 we derive the fact: Let $A \subset \mathbb{R}^{d}$ be $\mathcal{L}^{d}$ measurable.
+Then for every $\epsilon > 0$ there exist balls $(B_{r_i}(x_i))_{i=1}^{\infty}$ such that
+\[
+    A \subset \bigcup_{i=1}^{\infty}B_{r_i}(x_i) \quad \text{ and } \mathcal{ L}^{d}(A) \ge \sum_{i=1}^{\infty} \mathcal{L}^{d}(B_{r_i}(x_i)) - \epsilon
+\] 
+Given $\delta > 0$, $O \subset \mathbb{R}^{d}$ open, there exists $(B_{r_i}(x_i))_{i=1}^{\infty}$ disjoint such that
+\[
+    r_i \le \delta \quad B_{r_i}(x_i) \subset O \qquad \mathcal{L}(A \cap O \setminus \bigcup_{i=1}^{\infty} B_{r_i}(x_i)) = 0
+\] 
+
+We are going to assume the following facts:
+Fact(2)
+\[
+\mathcal{L}^{d}( B_r(x_0)) = r^{d} \mathcal{L}^{d}(B_1( \vec 0))
+\] 
+Exercise: (Assume we can solve EXO 2.1 and 2.2)\\
+Let $M \in \mathbb{R}^{d \times d}$ be a matrix and $A \subset \mathbb{R}^{d}$ be Borel. Show that $ \mathcal{L}^{d}( \{ Mx : x \in A\}) = | det M| \mathcal{L}^{d}(A)$.
+Identify $M$ with  $x \to Mx$ and assume we take
+\[
+f : \mathbb{R}^{d} \to \mathbb{R}^{d} \quad \mathcal{L}^{d}(f(A))
+\] 
+Solution: By Facts 1, it suffices to solve the exercise when $A = B_r(x_0)$ write $M = PS$ where  $P, S \in \mathbb{R}^{d \times d}$ $P$ orthogonal,  $S$ symmetric
+and write  $S = Q^{\top} \Lambda Q$ where $Q, \Lambda \in \mathbb{R}^{d}$ and $Q$ orthogonal,  $\Lambda = diag(\lambda_1,\dots,\lambda_d)$ then
+\[
+\mathcal{L}^{d}(M B_r(x_0)) = \mathcal{L}^{d}( P Q^{\top} \Lambda Q B_r(x_0)) = \mathcal{L}^{d}(\Lambda Q B_r(x_0) = \mathcal{L}^{d}( \Lambda B_r(Q(x_0))) = |det \Lambda| \mathcal{L}^{d}(B_r(Q(x_0))) 
+\] 
+but $|det \Lambda| = |det M|$.
+Goal: Let  $f : \mathbb{R}^{d} \to \mathbb{R}^{d}$ be Lipschitz and let $g \in  L^{1}(\mathbb{R}^{d})$. Set $J_f = det \nabla f$ where we use Rademacher theorem that says the derivative
+exists almost everywhere. We want to show that
+ \[
+\int_{ \mathbb{R}^{d}}^{}g(x) |J_f(x)| dx  = \int_{ \mathbb{R}^{d}}^{} \sum_{x \in f^{-1}(y)}^{}g(x) dy
+\] 
+In particular if $\tilde g : \mathbb{R}^{d} \to [0,+\infty)$ is Borel then $g = \tilde g \circ f$ and  $D \subset \mathbb{R}^{d}$ is open then
+\[
+\int_{ D}^{} \tilde g \circ f |J_f(x)| dx = \int_{ \mathbb{R}^{d}}^{}\tilde g(y) N(y,D) dy
+\] 
+where $N(y,D) = Card\{f^{-1}(y) \cap D\}$ and $y = \nabla f(x), dy = |det \nabla f(x)|dx$\\
+Exercise: Let  $f : \mathbb{R}^{d} \to \mathbb{R}^{d}$ be $l$-Lipshchitz and let  $A \subset \mathbb{R}^{d}$ be  $ \mathcal{L}^{d}$-measurable.
+\begin{enumerate}
+    \item Show that $f(A) $ is  $ \mathcal{L}^{d}$-measurable
+    \item Show that $y \to N(y,A) = Card\{f^{-1}(y) \cap A\}$ is $ \mathcal{L}^{d}$ - measurable.
+\end{enumerate}
+Solution: It is a not a loss of generality to assume that $A$ is bounded.
+\begin{enumerate}
+    \item For each $n \in \mathbb{N}$ we choose $K_n \subset A$ compact such that $ \mathcal{L}^{d}(A \setminus K_n) < \frac{1}{n}$. Since $f(K_n)$ is compact,  $\bigcup_{n=1}^{\infty}f(K_n)$ is a borel set. Note that $ \mathcal{L}^{d}(A \setminus ( \bigcup_{m=1}^{\infty}K_m)) \le \mathcal{L}^{d}(A \setminus K_n) \le \frac{1}{n}$ so
+        it is a null set $ \mathcal{L}^{d}(A \setminus (\bigcup_{m=1}^{\infty}K_m)) = 0$. Let $K = bigcup_{m=1}^{\infty}K_m$ 
+        \[
+            f(A) = f(K) \cup f(A \setminus K)
+        \] 
+        \[
+        \mathcal{L}^{d}(f(A \setminus K)) \le (Lip f)^{d} \mathcal{L}^{d}(A \setminus K)  = 0
+        \] 
+        by exercise $2.3$ 
+        Hence $f(A \setminus K)$ is  $ \mathcal{L}^{d}$ measurable and so $f(A)$ is  $ \mathcal{L}^{d}$-measurable.
+    \item 
+        I am going to divide $ \mathbb{R}^{d}$ into rectangles dyadic and in each rectangle given $y$ we want to count the number of  $x$ such that  $f(x) = y$ if there are finitely many points in the preimage we can make the grdid so small that each are in a separate grid, otherwise there are infinite and( i lost what he said).
+        Fore each  $k \in \mathbb{N}$ set  $B_k = \{Q : Q = (a_1,b_1] \times \dots \times (a_d,b_d] : b_i = a_i + \frac{1}{k}, a_i \in \frac{1}{k} \mathbb{Z}, i = 1,\dots,d\}$.
+        Note that $ B_k$ is a partition of $ \mathbb{R}^{d}$. 
+        givne $y \in \mathbb{R}^{d}$ we set
+        \[
+            g_k(y) = Card\{Q : Q \in B_k : f^{-1}(y) \cap (A \cap Q) \ne \emptyset\} = \sum_{Q \in B_k}^{}1_{f(A \cap Q)}
+        \] 
+        By i, $g_k$ is  $ \mathcal{L}^{d}$ measurable and by homework 2.4 or 2.5
+        \[
+            \lim_{k\to \infty}g_k(y) = card\{ f^{-1}(y) \cap A\} = N(y,A)
+        \] 
+        Remark, By the monotone convergence theorem 
+        \[
+        \int_{ \mathbb{R}^{d}}^{}N(y,A) dy = \lim_{k\to \infty} \int_{ \mathbb{R}^{d}}^{}g_k(y)dy = \lim_{k\to \infty} \sum_{ Q \in B_k}^{} \mathcal{L}^{d}(f^{-1}(A \cap Q))\]\[ \le \lim_{k\to \infty} \sum_{ Q \in B_k}^{} (Lip f)^{d} \mathcal{L}^{d}(A \cap Q) = (Lip f)^{d} \mathcal{L}^{d}(A)
+        \] 
+        Hence $N(\cdot, A) \in L^{1}( \mathbb{R}^{d})$ if $A$ is bounded
+\end{enumerate}
+
+
 
 
 \end{document}

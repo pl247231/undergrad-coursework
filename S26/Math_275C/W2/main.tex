@@ -1,0 +1,293 @@
+\documentclass[11pt]{article}
+
+\newcommand{\cnum}{Math 245B}
+\newcommand{\ced}{Winter 2026}
+\newcommand{\ctitle}[4]{\title{\vspace{-0.5in}\cnum, \ced\\Assignment #1: #2}\author{\vspace{-0.35in}\\#3, #4}}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames,svgnames,table,hyperref]{xcolor}
+\usepackage{amsmath, amsfonts}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\renewcommand*{\theenumi}{\alph{enumi}}
+\renewcommand*\labelenumi{(\theenumi)}
+\renewcommand*{\theenumii}{\roman{enumii}}
+\renewcommand*\labelenumii{\theenumii.}
+\newcommand{\notiff}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{"}$\hidewidth\cr$\iff$}}}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{header}{HTML}{205459}
+\definecolor{solution}{HTML}{204d52}
+
+\newcommand{\solution}[1]{{{\textcolor{header}{Solution:} \textcolor{solution}{#1}}}}
+\setlist[enumerate]{label=(\alph*)}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+
+\begin{document}
+\ctitle{\#1}{}{Asher Christian}{006-150-286}
+\date{}
+\maketitle
+
+\section{Monday}
+25 studnets one teacher and one gift where the gift does the simple random walk on the circle,
+$x$ wins if $T_x \ge \max_{y \ne x} T_y$
+\[
+    \mathbb{P}(T_x > \max_{y \ne x}T_y) = \frac{1}{25}
+\] 
+Proof: for $*$ who is sitting left of the teacher probability that they win is
+ \[
+\mathbb{P}(T_1 > T_2) = \frac{1}{25}
+\] 
+For 6
+\[
+\mathbb{P}(T_7 > \max_{y \ne 7}T_y) = \mathbb{P}(Y_7 > \max_{y \ne 7} T_y, T_6 > T_8) + \mathbb{P}(T_7 > \max_{y \ne 7} T_y, T_8 > T_{16})
+\] 
+\[
+= \mathbb{P}(\dots | T_6 > T_8) \mathbb{P}(T_6 > T_8) + \mathbb{P}(\cdots | T_8 > T_6) \mathbb{P}(T_8 > T_6)
+\] 
+need to show
+\[
+\mathbb{P}(T_7 > \cdots | T_6 > T_8) = \frac{1}{25}
+\] 
+for the $T_8 > T_6$ it is equivalent to
+\[
+\mathbb{P}(T_7 > T_6 | X_0 = 8) = \frac{1}{25}
+\] 
+Example
+\[
+    T:= \min\{n > 0, X_n = a \text{ or } -b\}
+\] 
+\[
+    \mathbb{E}[T] = ab
+\] 
+define
+\[
+    g(x) = \mathbb{E}[T | X_0 = x] \quad g(a) = g(-b) = 0
+\] 
+\[
+g(x) = \frac{1}{2}g(x+1) + \frac{1}{2}g(x-1) + 1
+\] 
+\[
+A \subset S
+\] 
+\[
+    \mathbb{E}[T_A | X_0 = x] = g(x)
+\] 
+\[
+g(y) = 0 \qquad \forall y \in A
+\] 
+\[
+g(x) = \sum_{y}^{}p(x,y) g(y)  + 1 \quad \forall x \not\in A
+\] 
+\[
+    \mathbb{E}[T_A | x_0 = x] \qquad x \not\in A
+\] 
+\[
+    = \sum_{y}^{}\mathbb{E}[T_A 1_{X_1 = y}| X_0 = x]
+\] 
+\[
+    T_A = \min \{n > 0, X_n \in A\}
+\] 
+\[
+    = \sum_{y}^{}\sum_{k}^{}k \mathbb{P}(T_A = k, X_1 = y | X_0 = x) = \sum_{k}^{}\sum_{y}^{} k \mathbb{P}(T_A = k | X_1 = y X_0 = x) p(x,y)
+\] 
+first we only care when $ k \ge 1$
+ \[
+     \mathbb{P}(X_k \in A, X_{k-1} \not\in A \dots X_1 \not\in A | X_1 = y, X_0 = x]
+\] 
+\[
+\mathbb{P}(A, B | B) = \mathbb{P}(A | B)
+\] 
+and  you get
+\[
+    \mathbb{P}(X_k \in A, \dots, X_2 \not\in A | X_1 = y) = \mathbb{P}(X_{k-1} \in A, \dots, | X_0 = y) = \mathbb{P}(T_A = k-1 | X_0 = y)
+\] 
+\[
+= \sum_{k}^{} \sum_{y}^{} k \mathbb{P}(T_A = k-1 | X_0 = x) p(x,y)\]\[ = \sum_{k}^{}\sum_{y}^{}(k-1) \mathbb{P}(T_A = k-1 | X_0 = y) p(x,y) + \sum_{k}^{}\sum_{y}^{} \mathbb{P}(T_A = k-1 | X_0 = y) p(x,y)
+\] 
+finish later\\
+$x = 0, x = x + random(), while x < 1$  then what is $ \mathbb{E}X$
+
+\section{Wednesday}
+$Q. \{X_n\}$ Markov chain
+ \[
+X_0 = 0 \quad     X_{n+1} = X_n + \xi_n 1_{X_n < 1}
+\] 
+\[
+\xi_n \sim U(0,1) \quad iid
+\] 
+\[
+    T := \min\{n > 0 , X_n \ge 1\}, \mathbb{E}(T)
+\] 
+what is
+\[
+    \mathbb{E}[X_T]
+\] 
+\[
+h(a) = \mathbb{E}[X_T | X_0 = a]
+\] 
+\[
+    h(0) = \int_{0}^{1}h(a)da \quad h(1) = 1, h(b) = b, b \in [1,2]
+\] 
+\[
+h(a) = \int_{a}^{1}h(s)ds + \int_{1}^{1+a}bdb
+\] 
+\[
+h'(a) = -h(a) \dots
+\] 
+\[
+h(a)
+\] 
+in the homework.\\
+Consider SRW between $-b, a$
+ \[
+     T = T_a \wedge T_{-b} \qquad \mathbb{E}[T] = ab
+\] 
+For markov chain
+\[
+    g(x) = \mathbb{E}[T^2 | x_0 = x]
+\] 
+\[
+g(a) = g(-b) = 0
+\] 
+And for $ - b < x < a$
+\[
+    g(x) = \mathbb{E}[T^2 1_{X_1 = x + 1} | x_0 = x] + \mathbb{E}[T^2 1_{X_1 = x -1} | X_0 = x]
+\] 
+\[
+    \mathbb{E}[T^2 1_{X_1 = x + 1} | X_0 = x] = \frac{1}{2} \mathbb{E}[(T+1)^2 | X_0 = x + 1] 
+\] 
+\[
+    = \frac{1}{2} (g(x+1) + 2 \mathbb{E}[T | x_0 = x + 1] +  1)
+\] 
+General Definition of Markov Chain
+We have state space $S$ we want to know
+\[
+    \mathbb{P}(X_{n+1} \in A | X_n = x)
+\] 
+for $A \in \mathcal{S}, (S, \mathcal{S})$ measure space the key function now is
+ \[
+     p(x,A), x \in S, A \in \mathcal{S}
+\] 
+\[
+    p : S \times \mathcal{S} \to [0,1]
+\] 
+recall. $p(x,y)$ we must have 
+ \[
+\sum_{y}^{}p(x,y) = 1
+\] 
+for all $x$  $p(x, *)$ is a probability measure and
+for all  $A \in \mathcal{S}$,  $P(\star, A)$ is  $\mathcal{S}$-measurable
+
+\section{Friday}
+
+\[
+    p(x, A) \quad x \in S, A \in \mathcal{S}
+\] 
+\[
+    \mathbb{P}(X_{n+1} \in A | \mathcal{F}_n) = p(X_n, A)
+\] 
+\[
+    \mathbb{P}(X_{n+1} \in A | X_n = x) = p(x,A)
+\] 
+time homogeneous markov chain with $p(x, A)$
+In the discrete case
+ \[
+     p(i,j) = \mathbb{P}(X_{n+1} = j | X_n = i)
+\] 
+\[
+\mathbb{P}(X_0 \in A_0, X_1 \in A, \dots X_n \in A_n)
+\] 
+\[
+    \mathbb{P}(X_0 \in A_0) = \mathbb{P}_{\mu_0}(x_0 \in A_0) = \sum_{x_0 \in A_0}^{} \mu_0(x_0) ( \sum_{a_1 \in A_1}^{}p(a_0,a_1))
+\] 
+\[
+    \mathbb{P}(X_0 \in A_0, X_1 \in A_1 \dots, X_n \in A_n) = \sum_{a_0 \in A_0}^{} \dots \sum_{a_n \in A_n}^{}\mu_0(a_0) p(a_0,a_1)p(a_1,a_2)\dots p(a_{n-1},a_n)
+\] 
+\[
+    = \sum_{a_0 \in A_0}^{}\mu_0(a_0) \sum_{a_1 \in A_1}^{}p(a_0,a_1)\dots \sum_{a_n \in A_n}^{}p(a_{n-1},a_n) 
+\] 
+we have the joint pmf $f_{x_0,\dots,x_n}$ is a function of $p, \mu_0$ and the marginal distributions are the same as the previous distributions.
+By Kolomogorov extensino theorem we can extend this distribution to $f_{x_0,\dots,x_n,\dots} = f_{\infty}$
+so there exists a infinite markov chain whose jumping rate is $p$ and initial distribution is $\mu_0$.
+What about for general $S$?
+ \[
+\mathbb{P}(X_0 \in A_0) = \mu_0(A_0) = \int_{A_0}^{}d \mu_0 = \int_{}^{}1_{a_0 \in A_0} d\mu(a_0)
+\] 
+\[
+    (2) \quad    \mathbb{P}(X_0 \in A_0, X_1 \in A_1) = \int_{}^{}1_{a_0 \in A_0}d \mu_0(a_0) \int_{}^{}1_{a_1 \in A_1} p(a_0,da_1)
+\] 
+where 
+\[
+    \mathbb{P}(a_0, A_1)  = \mu_{a_0}(A_1) = \int_{}^{}1_{a_1 \in A_1}d\mu_{a_0}(a_1) = \int_{}^{}1_{a_1 \in A_1} p(a_0,da_1) = \int_{A_1}^{}p(a_0,d*)
+\] 
+and we have
+\[
+    p(x,A) \text{is a probability measure for fixed $x$ we can call it $\mu_x = p(x,dy)$}
+\] 
+but
+\[
+    (2) = \int_{A_0}^{}p(a_0,A_1) d \mu_0(a_0) = \int_{}^{}\left( \int_{}^{}1_{a_1 \in A_1} p(a_0,da_1)\right) 1_{a_0 \in A_0} d \mu_0(a_0)
+\] 
+\[
+= \int_{a_0 \in A_0}^{}\int_{a_1 \in A_1}^{}d\mu(a_0) p(a_0,da_1)
+\] 
+\[
+    \mathbb{P}(x_0 \in A_0 \dots X_n \in A_n) = \int_{a_0 \in A_0}^{} \dots \int_{a_n \in A_n}^{}d\mu_0(a_0) p(a_0,da_1)p(a_1,da_2)\dots p(a_{n-1},da_n)
+\] 
+\[
+    = \dots \int_{}^{}1_{a_{n-1} \in A_{n-1}}\left(\int_{}^{}1_{a_n \in A_n}p(a_{n-1},d(a_n))\right)p(a_{n-1},da_{n-1}) \dots
+\] 
+We have the distribution of $(X_0,\dots,X_n)$ which only depends on $p(*,*)$ and  $\mu_0$.
+\section{Theorem} Ionescu-Tulcea
+\[
+    \mathcal{F}_{\infty}
+\] 
+exists if $S$ is a metric space\\
+Now check that this  $\{X_n\}$ has  Markov Prperty
+ \[
+     \mathbb{P}(X_{n+1} \in B |  \mathcal{F}_n) = p(X_n, B)
+\] 
+\[
+    \mathbb{E}[X | \mathcal{F}) = Y \iff \forall A \in \mathcal{F}, \mathbb{E}[X 1_A] = \mathbb{E}[Y 1_A], Y \in \mathcal{F}
+\] 
+so we need to prove $\forall A \in \mathcal{F}_n$
+\[
+    \mathbb{E}[1_{X_{n+1} \in B} 1_A = \mathbb{E}p(x_n, B) 1_{A}
+\] 
+We only need to prove for rectangle events $A \i \mathcal{F}_n$ 
+\[
+    A = \{X_0 \in A_0,\dots,X_n \in A_n\}
+\] 
+\[
+\mathbb{E} 
+\] 
+
+\end{document}

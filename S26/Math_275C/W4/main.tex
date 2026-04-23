@@ -1,0 +1,250 @@
+\documentclass[11pt]{article}
+
+\newcommand{\cnum}{Math 245B}
+\newcommand{\ced}{Winter 2026}
+\newcommand{\ctitle}[4]{\title{\vspace{-0.5in}\cnum, \ced\\Assignment #1: #2}\author{\vspace{-0.35in}\\#3, #4}}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames,svgnames,table,hyperref]{xcolor}
+\usepackage{amsmath, amsfonts}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\renewcommand*{\theenumi}{\alph{enumi}}
+\renewcommand*\labelenumi{(\theenumi)}
+\renewcommand*{\theenumii}{\roman{enumii}}
+\renewcommand*\labelenumii{\theenumii.}
+\newcommand{\notiff}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{"}$\hidewidth\cr$\iff$}}}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{header}{HTML}{205459}
+\definecolor{solution}{HTML}{204d52}
+
+\newcommand{\solution}[1]{{{\textcolor{header}{Solution:} \textcolor{solution}{#1}}}}
+\setlist[enumerate]{label=(\alph*)}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+
+\begin{document}
+\ctitle{\#1}{}{Asher Christian}{006-150-286}
+\date{}
+\maketitle
+
+\section{Monday}
+\[
+    \mathbb{P}(X,A) , x \in S A \in \mathcal{S}
+\] 
+for state space $(S, \mathcal{S})$
+\[
+\mathbb{P}(X_0 \in A_0 \dots X_n \in A_n)
+\] 
+\[
+    \int_{A_0}^{}\mu(dx_0) \int_{A_1}^{}p(x_0,dx_1) \int_{A_2}^{}\dots \int_{A_n}^{}p(x_{n-1}, dx_n)
+\] 
+\[
+    \mathbb{P}(X_{n+1} \in A | \mathcal{F}_n) = p(X_n, A)
+\] 
+\[
+    = \mathbb{E}(1_{X_{n+1} \in A} | \mathcal{F}_n)
+\] 
+skip proof.
+\[
+    \mathbb{E}(F(X_0,\dots,X_n)), f_i \in \mathcal{S}, |f_i| \le M, \exists M
+\] 
+Lemma
+\[
+    \mathbb{E}( \Pi_{i=1}^{n}f_i(X_i)) = \int_{}^{}f(x_0) \mu(x_0) \int_{}^{}f(x_1) p(x_0,dx_1) \int_{}^{}f(x_2) p(x_1,dx_2) \dots \int_{}^{}f_n(x_n) p(x_{n-1},dx_n)
+\] 
+e.g. if $f_i(x_i) = 1_{x_i \in A_i}$ for  $A_i \in \mathcal{S}$.
+Monotone class theorem
+Say you have a collection of measurable functions  $\mathcal{H}$ each in $\sigma( \mathcal{A})$ 
+and $  \mathcal{A}$ is a $ \pi$-system. If
+\begin{enumerate}
+    \item $1_A \in \mathcal{H}$ for all $A \in \mathcal{A}$
+    \item $f,g \in \mathcal{H}$ then $f+g \in \mathcal{H}$ and $c f \in \mathcal{H}$ 
+    \item $\{f_n\}_{n=1}^{\infty} \subset \mathcal{H}$ bounded and 
+        $f_n \uparrow f$, $f$ bounded then $f \in \mathcal{H}$
+\end{enumerate}
+Then for all bounded $f \in \sigma( \mathcal{A})$, $f \in \mathcal{H}$\\
+Now to prove lemma, Let
+ \[
+     \mathcal{A} = \text{ rectangles of sets in $ \mathcal{S}$, $\mathcal{S}^{n}$}
+\] 
+and we have clearly $\mathcal{H}$ is linear closed and contains these indicators and is monotone closed by monotone convergence theorem 
+%why did we require the functions to be multiplication, why is this not true for E(F( X_1,\dots,X_N))
+
+\[
+    \mathbb{P}(\text{future} | X_n, \text{past}) \mathbb{P}( \text{future -n} |X_0)
+\] 
+e.g.
+\[
+    \mathbb{P}(X_{n^2} = 3 | X_n = 2, X_1 < X_0) = \mathbb{P}(X_{n^2 - n} | X_0 = 2)
+\] 
+\[
+    \mathbb{P}(\text{Future} + n | X_n, \text{past}) = \mathbb{P}(\text{Future} | X_0)
+\] 
+e.g.
+\[
+\mathbb{P}(X_8 = 7 | X_3 =5, X_2 > X_1) = \mathbb{P}(X_5 = 7 | X_0 = 5)
+\] 
+\[
+    \mathbb{E}_\mu( Y \circ \theta_n | \mathcal{F}_n) = \mathbb{E}_{X_n} (Y)
+\] 
+From 171
+\[
+    \mathbb{E}[f_{\text{future}}+n | X_n, \text{past}] = \mathbb{E}[f_{\text{future}} | X_0]
+\] 
+\[
+\mathbb{E}_a(Z) = \mathbb{E}[Z | X_0 = a]
+\] 
+\[
+    \mathbb{E}_\mu[Z] = \mathbb{E}[Z | X_0 \sim \mu
+\] 
+\[
+    (\Omega, \mathcal{F}, \mathbb{P})
+\] 
+\[
+    \Omega =  ( S^{ \mathbb{N}}, \mathcal{S}^{ \mathbb{N}})
+\] 
+\[
+\omega \in \Omega, \omega = (\omega_0,\dots,\omega_n,\dots)
+\] 
+\[
+X_n(\omega) = \omega_n
+\] 
+\[
+X_n : \Omega \to S
+\] 
+Choose $ \mathcal{F}$ such that $\{X_n\}$ is a markov chain w.r.t  $\mu, p(*,**)$
+so we define
+\[
+\theta_n : \Omega \to \Omega
+\] 
+\[
+    \theta_n(\omega) = \theta_n(\omega_0,\dots,\omega_n,\dots) = (\omega_n,\omega_{n+1},\dots)
+\] 
+
+\section{Wednesday}
+
+\[
+    \mathbb{E}[Y \circ \theta_n | \mathcal{F}_n ] = \mathbb{E}_{X_n} Y
+\] 
+where
+\[
+    \theta_n : \Omega \to \Omega  \quad \theta_n(\omega) = (\omega_n, \omega_{n+1},\dots)
+\] 
+\[
+\mathcal{F}_n = \sigma(X_1,\dots,X_n)
+\] 
+\[
+    \mathbb{E}_{X_n} Y
+\] 
+suppsose $n = 5$  $Y = X_5$ what is $ \mathbb{E}_{X_5} X_5$.
+First 
+\[
+\mathbb{E}_\mu Y \sim \mathbb{E}_\mu X_5
+\] 
+makes sense.
+Also
+\[
+\mathbb{E}_1 Y \sim \mathbb{E}(X_5 | X_0 = 1)
+\] 
+\[
+E_a Y \sim \mathbb{E}(X_5 | X_0 = a)
+\] 
+if $X_0 = 1$ what is the expectation of $Y$? 
+Define $g(a) = \mathbb{E}_a Y$.
+$g : S \to \mathbb{R}$ is a deterministic function (not random)
+we have
+\[
+    \mathbb{E}_{X_n} Y = g(X_n) \in \sigma(X_n)
+\] 
+is a random variable.
+If $n =5 , Y = X_5$
+ \[
+     \mathbb{E}_{X_5} Y = g(X_5) \quad g(a) = \mathbb{E}_a X_5 = \mathbb{E}_a Y_5 = \mathbb{E}_a \tilde X_5
+\] 
+Lemma Markov Chain Property
+\[
+\forall n \ge 1, \forall Y \in \sigma(X_1,X_2,\dots)
+\] 
+If $Y$ is bounded then 
+ \[
+     \mathbb{E}(Y \circ \theta_n | \mathcal{F}_n) = \mathbb{E}_{X_n} Y
+\] 
+Proof:
+need to prove for any such $Y$ and $A \in \mathcal{F}_n$
+ \[
+     \mathbb{E}Y \circ \theta_n 1_A =  \mathbb{E} 1_A g(X_n) \quad g(a) = \mathbb{E}[Y | X_0 = a]
+\] 
+we only need to prove for $A$ is a rectangle in  $ \mathcal{F}_n$ i.e. $\{X_0 \in A_0, X_1 \in A_1, \dots, X_n \in A_n\}$.
+And by monotone class theorem we only need to prove the result for $Y$ indicator functions
+Recally monotone class theorem  $\mathcal{H} \ni 1_A$ if  $A \in \mathcal{A}$ is linear and bounded monotone closed, then if  $f \in \sigma( \mathcal{A})$ then $f \in \mathcal{H}$. 
+Here $\mathcal{H} = \{\text{bounded, $\sigma(X_1\dots,X_n)$ measurable functions that satisfies our identity}\}$ 
+This collection satisfies everything so we only need to show it contains the indicator function for all $A \in \mathcal{A}$ where
+for  $ \mathcal{A}$ we want this  $\mathcal{ A}$ to be a pi system
+we can choose  $ \mathcal{A}$
+\[
+    \mathcal{A} = \bigcup_{i=1}^{\infty} \sigma (X_1,\dots,X_i) = \bigcup_{i=1}^{\infty}  \mathcal{A}_i
+\] 
+but there is a better $ \mathcal{A}$
+\[
+    \mathcal{A} = \bigcup_i \text{ rect sets in $ \mathcal{A}_i$}
+\] 
+Now $ A \in \mathcal{A}$ implies $A = \{ X_1 \in B_1, X_2 \in B_2, \dots, X_m \in B_m\}$
+So with Monotone class theorem to prove this markov chain property, we only need to choose $Y =1_A$ for  $A \in \mathcal{A}$
+i.e. we only need to chose  $Y$ in form of
+ \[
+    Y = 1_{X_0 \in B_0} \dots 1_{X_m \in B_m}
+\] 
+so need to prove
+\[
+    \mathbb{E} 1_{X_{n+1} \in B_1} 1_{X_{n+2} \in B_2} \dots 1_{X_{n+m} \in B_m} 1_{X_1 \in A_1} \dots  1_{X_n \in A_n} =  \dots
+\] 
+skip the details for calculation.\\
+Next topic is strong markov chain property:
+Application 2d random walk and we deinfe $\rho_{xy} = \mathbb{P}(T_y < \infty | X_0 = x)$
+\[
+    \rho^{(2)}_{xx} = (\rho_{xx})^2
+\] 
+need probability back twice given back once and $X_0 = x$ is equal to probability back once given $X_0 = x$
+so we define
+\[
+    A =  \{ \exists n_2 > n_1 > 0 \text{ s.t. } X_{n_2} = X_{n_1} = x\}
+\] 
+\[
+    B = \{ \exists n_1 > 0 \text{ s.t. } X_{n_1} = x\}
+\] 
+\[
+\mathbb{P}(A | B, X_0 = x)
+\] 
+the shift must be a stopping time $\theta_{\tau}$
+
+
+
+\end{document}

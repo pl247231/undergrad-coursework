@@ -1,0 +1,339 @@
+\documentclass[11pt]{article}
+
+\newcommand{\cnum}{Math 245C}
+\newcommand{\ced}{Spring 2026}
+\newcommand{\ctitle}[4]{\title{\vspace{-0.5in}\cnum, \ced\\week #1: #2}\author{\vspace{-0.35in}\\#3, #4}}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames,svgnames,table,hyperref]{xcolor}
+\usepackage{amsmath, amsfonts}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\renewcommand*{\theenumi}{\alph{enumi}}
+\renewcommand*\labelenumi{(\theenumi)}
+\renewcommand*{\theenumii}{\roman{enumii}}
+\renewcommand*\labelenumii{\theenumii.}
+\newcommand{\notiff}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{"}$\hidewidth\cr$\iff$}}}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{header}{HTML}{205459}
+\definecolor{solution}{HTML}{204d52}
+
+\newcommand{\solution}[1]{{{\textcolor{header}{Solution:} \textcolor{solution}{#1}}}}
+\setlist[enumerate]{label=(\alph*)}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+
+\begin{document}
+\ctitle{\#1}{}{Asher Christian}{}
+\date{}
+\maketitle
+
+\section{Monday}
+Reminder: $\Omega \subset \mathbb{R}^{d}$ is an open bounded set.
+Let $f \in C^{1}(\overline{\Omega}, \mathbb{R}^{d})$. Fix $a \in \Omega$ and set 
+ \[
+L(x) = \nabla f(a)(x-a) + f(a) = Mx + b
+\] 
+Theorem: For any $g: \mathbb{R}^{d} \to [0,+\infty)$ Borel, we have
+\[
+\int_{\Omega}^{}g(x) J_f(x)dx = \int_{ \mathbb{R}^{d}}^{} \left(\sum_{\omega \in f^{-}(y) \cap \Omega}^{}g(\omega) \right) dy
+\] 
+where
+\[
+J_f = |det \nabla f |
+\] 
+Proof: It suffices to prove the theorem when  $g = 1_B$ where  $B \subset \Omega$ is Borel.
+In this case we are to show that
+\[
+    (1) \quad    \int_{B}^{}J_f(x)dx = \int_{ \mathbb{R}^{d}}^{} \left(\sum_{\omega \in f^{-1}(y) \cap \Omega}^{}1_B(\omega)\right) dy = \int_{ \mathbb{R}^{d}}^{}H^{0} \{f^{-1}(y) \cap B\} dy
+\] 
+where $H^{0}(S)$ is the cardinality of $S$ in general  $H^{k}(S)$ we take $(diam Q)^{k}$ hausdorff measure.
+We learned that if $A \subset \Omega$ is borel then $y \to H^{0}\{f^{-1}(y) \cap A\}$ is measurable wrt $ \mathcal{L}^{d}$.
+So $A \to \mu[A] = \int_{ \mathbb{R}^{d}}^{} H^{0}\{f^{-1}(y) \cap A\}$ is a Borel measure..
+Showing $(1)$ is equivalent, in light of the Radon-Nikodym theorem, to showing
+ \[
+\mu << \mathcal{L}^{d}|_\Omega \qquad \frac{D \mu}{D \mathcal{L}^{d}} = J_f
+\]
+If we can show that $\mu[B_r(x)] \le \int_{B_r(x)}^{}$ of a function this will show absolute continuity.\\
+Let $a \in \Omega$ and assume that  $J_f(a) \ne 0$ we will give a partial proof of the theorem.
+By the inverse function theorem, there exists $r_0 > 0$ such that for  $r \in (0,r_0)$ 
+\[
+    (i) f|_{B_r(a)} \text{ is one-one} \quad (ii) f(D_r(a)) \text{ is open} 
+\] 
+and 
+\[
+    (iii) f^{-1}: f(D_r(a)) \to \mathbb{R}^{d} \text{ is continuous}
+\] 
+Here
+\[
+    D_r(a) = \{x \in \mathbb{R}^{d} :  ||x-a||_{l_2} < r\} \quad B_r(a) = \overline{ D_r(a)}
+\] 
+If $r \in (0,r_0)$ then the following is true
+\[
+    H^{0}\{f^{-1}(y) \cap B_r(a)\}  = 1 \iff y \in f(B_r(a))
+\] 
+this is equivalent to 
+\[
+    H^{0}\{f^{-1}(y) \cap B_r(a)\} = 1_{f(B_r(a))}
+\] 
+Hence
+\[
+    (2) \quad    \mu[B_r(a)] = \int_{ \mathbb{R}^{d}}^{}H^{0}\{f^{-1}(y) \cap B_r(a)\} = \int_{ \mathbb{R}^{d}}^{} 1_{f(B_r(a))} dy = \mathcal{L}^{d}[f(B_r(a))]
+\] 
+And by homework exercise 2.4
+\[
+    f(B_r(a)) \subset L(B_{r + o(r)}(a)) 
+\] 
+\[
+    L(B_r(a)) \subset f(B_{r + o(r)}(a))
+\] 
+so lesbegue measure follows the same inequalities.
+And since $L(B_r(a)) = M(B_r(a)) + b$ 
+\[
+    |det M| \mathcal{L}^{d}(B_{r + o(r)}(a)) =\mathcal{L}^{d}(M(B_{r + o(r)}(a))) = \mathcal{L}^{d}(L(B_{r + o(r)}(a))) \ge \mathcal{L}^{d}(f(B_r(a)))
+\] 
+hence
+\[
+    \lim_{r\to 0} \frac{\mu[B_r(a)]}{ \mathcal{L}^{d}[B_r(a)]} = 
+\] 
+\[
+\lim_{r\to 0} \frac{L^{d}(f(B_r(a)))}{ \mathcal{L}^{d}(B_r(a))} = \lim_{r\to 0} \frac{\mathcal{L}^{d}( L (B_r(a)))}{ \mathcal{L}^{d}(B_r(a))}
+\] 
+\[
+    (3) \quad    = \lim_{r\to 0} \frac{|det M| \mathcal{L}^{d}(B_r(a))}{ \mathcal{L}^{d}(B_r(a))} = J_f(a)
+\] 
+by $(2)$
+ \[
+     \mu|_{\{J_f \ne 0\}} << \mathcal{L}^{d}_\Omega
+\] 
+If we can show that $\mu|_{\{J_f = 0\}} << \mathcal{L}^{d}$ then using $(3)$ we conclude that
+\[
+\frac{D \mu }{ D \mathcal{L}^{d}} = |J_f|
+\] 
+We acn say
+\[
+    \mu[A] = \int_{A}^{} \frac{D \mu}{ D \mathcal{L}^{d}} dx + \mu_s [A]
+\] 
+This proves t he theorem for $g = 1_B$.
+Off the scope: 
+Definition: A topological space  $(X, \tau)$ is locally compact if every $x \in X$ has a compact neighborhood
+ \[
+     x \in U, U \text{open},  \overline{ U} \text{ compact}
+\] 
+$(X , \tau)$ is called a Hausdorff space if for every  $x,y \in X$ such that  $x \ne y$ there exist  $U,V \in \tau$ such that $x \in U, y \in V, U \cap V = \emptyset$\\
+Tietze Extension theorem:
+Let  $X$ be a LCH locally compact hausdorff spacae and  $K \subset X$ be compact. For every $g \in C(K)$ there exists  $G \in C(X)$ such that the following hold.
+ \[
+     G|_K = g \qquad spt G \text{ is compact}
+\] 
+in other words
+\[
+    \exists L \subset X \text{compact} : K \subset L \quad G|_{L^{c}} = 0
+\] 
+
+\section{Wednesday}
+The Riesz Representation Theorem on LCH spaces\\
+Throughout this section $ \mathcal{X}$ is a locally compact hausdorff space.\\
+Notation: if $f \in C( \mathcal{X})$ $||f||_{C( \mathcal{X})} = \sup_{x \in X} |f(x)| \in [0, +\infty]$ and
+\[
+    spt(f) = \overline{ \{f \ne 0\}}
+\] 
+\[
+    C_c( X) = \{f \in C( \mathcal{X}) : spt(f) \text{ is compact}\}
+\] 
+We say that $f \in C( \mathcal{X})$ vanishes at infinity and we write  $f \in C_0( \mathcal{X})$ if for all $\epsilon > 0$
+\[
+    \{|f| \ge \epsilon\}
+\] 
+is compact.\\
+\[
+    BC( \mathcal{X}) = \{f \in C( \mathcal{X}) : f \text{ is bounded }\}
+\] 
+Exercise:
+Show that $\overline{C_c( \mathcal{X})}^{||\cdot||_{C( \mathcal{X})}} = C_0( \mathcal{X})$\\
+Solution: $A \subset C_0( \mathcal{X})$ let $f \in A$ and let  $\epsilon > 0$ choose $g \in C_c ( \mathcal{X})$ such that $||g - f||_{C( \mathcal{X}} < \epsilon$ note that
+\[
+    \{|f| \ge \epsilon\} \subset spt(g)
+\] 
+is compact and since $\{|f| \ge \epsilon\}$ is closed by exercise 3.3, $\{|f| \ge \epsilon\}$ is compact.
+Conversely we want to show the other inclusion, let $f \in C_0( \mathcal{X})$ fix $\epsilon > 0$. Since $\{f \ge \epsilon\}$ is compact by Urysohn's lemma
+There exists $\phi \in C( \mathcal{X},[0,1]) \cap C_c( \mathcal{X})$   such that $\phi|_{\{|f| \ge \epsilon\}} \equiv 1$ setting $g = f \phi$ we have $g \in C_c( \mathcal{X})$ and
+\[
+    ||f-g||_{C( \mathcal{X})} = ||f(1-\phi)||_{C_c(x)} = \sup_{|f| \le \epsilon} |f ( 1- \phi)| \le \epsilon
+\] 
+Definition: A linear function $L : C_c( \mathcal{X}) \to \mathbb{R}$ is positive if $f \in C_c( \mathcal{X}) \ge 0 \implies L(f) \ge 0$.
+Proposition: Let $L : \mathbb{C}_c( \mathcal{X}) \to \mathbb{R}$ be a linear, positive function. Then, for every $K \subset \mathcal{X}$ compact, there exists 
+\[
+    C_K > 0  \quad |L(f)| \le C_k ||f||_{ C( \mathcal{X})} \qquad \forall f \in C_*(K) := \{f \in C( \mathcal{X}) : spt f \subset K\}
+\] 
+Suppose $f : \mathbb{R}^{d \to \mathbb{R}}$ and $\nabla^2 f \ge 0 \implies || \nabla f||_{L^{\infty}(B)} < +\infty$
+Proof: Let $K \subset \mathcal{X}$ be a compact nonempty set. By Urysohn lemma there exists $\phi \in C_c( \mathcal{X}) \cap \mathbb{C}( \mathcal{X}, [0,1])$ such that $\phi|_{K} \equiv 1$ set $C_k = L(\phi)$.
+If $f \in C_*(K)$ then
+ \[
+     \phi||f||_{C( \mathcal{X})}  \pm f \ge 0 \implies L(\phi ||f||_{C( \mathcal{X})}) \ge \pm L(f) \ni \{|Lf|\}
+\] 
+Hence
+\[
+    |Lf| \le C_K ||f||_{C( \mathcal{X})}
+\] 
+Reminder:  Let $\mu$ be an outer measure on $ \mathcal{X}$.
+\begin{enumerate}
+    \item $\mu$ is Borel if every Borel set is $\mu$-measurable
+    \item Suppose that $\mu$ is Borel and  $E \subset \mathcal{X}$ is a Borel set.
+        \begin{enumerate}
+            \item We say that $\mu$ is outer regular on $ E$ if
+                 \[
+                     \mu[E] = \inf_{O}\{\mu[O] : E \subset O, O \subset \mathcal{X} \text{ is open}\}
+                \] 
+            \item We say that  $\mu$ is inner regular on $ E$ if
+                \[
+                    \mu[E] = \sup_{K}\{\mu[K] : K \subset E, K \subset \mathcal{X} \text{ is compact}\}
+                \] 
+            \item We say that $\mu$ is borel regular if $\mu$ is Borel and inner regular
+                and outer regular on every Borel set.
+            \item We say that $\mu$ is a Radon measure if $\mu$ is Borel and
+                $\mu$ is outer regular on Borel sets, inner regular on open set, $\mu[K] < +\infty$ for every $K \subset \mathcal{X}$ compact 
+        \end{enumerate}
+\end{enumerate}
+Exercise: Let $\mu$ be a Radon measure on $ \mathcal{X}$ and $ E \subset \mathcal{X}$ be a Borel $\mu$-sigma-finite set.
+Show that $\mu$ is inner regular on $E$.
+Solution: Assume  $\mu[E] < \infty$ Let $\epsilon > 0$ we can choose $O \supset E$ open such that  $\mu[O \setminus E] < \frac{\epsilon}{4}$ 
+and let $F \subset \mathcal{X}$ be compact such that $F \subset O$ and $\mu[O \setminus F] < \frac{\epsilon}{4}$ Let $V \subset \mathcal{X}$ be open such that
+$O \setminus E \subset V$ and $\mu[V \setminus (O \setminus E)] < \frac{\epsilon}{4}$. Note that $\mu[V] \le \mu[V \setminus (O \setminus E)] + \mu[O \setminus E] < \frac{\epsilon}{2}$ set
+\[
+    K = F \cap V^{c}
+\] 
+By HWk assignment 3.3 $K$ is compact. It is very clear that  $K \subset E$ and $\mu[E \setminus K] < \epsilon$
+\[
+K \subset O \cap V^{c} \quad O = (O \setminus E) \cup E \subset V \cup E
+\] 
+\[
+    \mu[F] \le \mu[K] + \frac{\epsilon}{2} \quad \mu[F] = \mu[O] - \mu[O \setminus F] \ge \mu[E] - \frac{\epsilon}{4}
+\] 
+
+\section{Friday}
+Reminder $ \mathcal{X}$ is a LCH, 
+$\mu$ is a radon measure on $ \mathcal{X}$. For $f \in C_c( \mathcal{X})$ we set
+\[
+    I_\mu[f] = \int_{ \mathcal{X}}^{}f d\mu
+\] 
+If $ K \subset \mathcal{X}$ is compact and $O \subset \mathcal{X}$ is open. We set
+\[
+    l_\mu[K] = \inf_{f \in C_c( \mathcal{X})} \{I_\mu[f]: f \ge 1_K\} \quad l^{\mu}[O] = \sup_{f \in C_c( \mathcal{X})}\{I_\mu[f] : 0 \le f \le 1, spt f \subset O\}
+\] 
+Exercise: Let $K \subset \mathcal{X}$ be compact,  $O \subset \mathcal{X}$ be open. Show that
+\begin{enumerate}
+    \item $l_\mu[K] \ge \mu[K]$ and $l^{\mu}[O] \le \mu[O]$ 
+    \item  If $K \subset O$ then
+        $l_\mu[K] \le l^{\mu}[O]$ 
+    \item $l_\mu[K] = \mu[K]$
+\end{enumerate}
+Solution:
+\begin{enumerate}
+    \item Let $f \in C_c( \mathcal{X})$ be such that $f \ge 1_K$ then  $I_\mu[f] \ge \int_{X}^{}1_K d \mu = \mu[K]$ for all $f$ so
+        $l_\mu[K] \ge \mu[K]$. Similarly, $l^{\mu}[O] \le \mu[O]$ 
+    \item Now assume $K \subset O$ By Urysohn's lemma there exists $f \in C_c( \mathcal{X},[0,1])$ such that $f|_K \equiv 1$ and  $spt f \subset O$.
+        Thus
+        \[
+            l_\mu[K] \le I_\mu[f] \le l^{\mu}[O]
+        \] 
+    \item We are to show that for every $\epsilon > 0$ 
+         \[
+             l_\mu[K] \le \mu[K] + \epsilon
+        \] 
+        Let $P \subset X$ be an open set such that $K \subset P$ and $\mu[K] \ge \mu[P] - \epsilon$.
+        By
+        \[
+            l_\mu[K] \le l^{\mu}[P] \le \mu[P] \le \mu[K] + \epsilon
+        \] 
+        for every $\epsilon > 0$ which concludes the theorem.
+\end{enumerate}
+
+\section{Thm (Riesz Representation; Part I)}
+Given 
+ \[
+     I : C_c( \mathcal{X}) \to \mathbb{R} \quad \text{ linear, positive}
+\] 
+there exists a unique radon measure $\mu$ on $ \mathcal{X}$ such that $I = I_\mu$.
+Sketch of proof:
+Uniqueness. Suppose $\mu_1,\mu_2$ are Radon measures on $ \mathcal{X}$ such that $I_{\mu_1} = I_{\mu_2}$.
+By exercise 1 
+\[
+    \mu_1[K] = \mu_2[K]
+\] 
+for all $K \subset \mathcal{X}$ since $\mu_1$ and $\mu_2$ are inner regular on open sets we conclude that $\mu_1[O] = \mu_2[O]$ conclude by $\pi-\lambda$. 
+Since $\mu_1$ and $\mu_2$ are outer regular on Borel set, we conclude that $\mu_1[B] = \mu_2[B]$ for all $B \subset \mathcal{X}$.
+Existence: Set $ \overline{\mu}[O] = \sup_{f \in C_c( \mathcal{X})}\{I(f) : 0\le f \le 1, spt f \subset O\}$ for $O \subset \mathcal{X}$ open.
+For $E \subset \mathcal{X}$ set
+\[
+    \mu[E] = \inf_{O} \{\overline{\mu}[O]: B \subset O \subset \mathcal{X} \text{ is open}\}
+\] 
+check that $\mu$ is an outer measure such that $\mu[O] = \overline{\mu}[O]$ for $O \subset \mathcal{X}$ open.
+Check that if $K$ is compact, then $\mu[K] = \inf_{f \in C_c( \mathcal{X})}\{I[f] : f \ge 1_K\}$.
+Conclude that $I = I_\mu$
+
+\section{Definition}
+A countable intersection of open sets is called a $G_\delta$ set.\\
+A countable union of closed sets is called a $F_\sigma$ set.\\
+If $E_1,\dots,E_n \subset \mathcal{X}$ and $a_1,\dots,a_n \in \mathbb{R}$ we call 
+\[
+    f = \sum_{i=1}^{n}a_i 1_{E_i} \text{ a simple function}
+\] 
+Remark: If  $E_1,\dots,E_n$ are $\mu$-measurable. So if $f$ Note that if  $E \subset \mathcal{X}$ is not Borel we still have that
+\[
+    1 = 1_E + 1_{ \mathcal{X} \setminus E}
+\] 
+is Borel.
+If $a_1 < \dots < a_n$ and $E_i \cap E_j = \emptyset$ if  $i \ne j$ then
+ \[
+     \sum_{i=1}^{n}a_i 1_{E_i} 
+\] 
+$\mu$-measurable implies $E_i$ are  $\mu$-measurable.
+Exercise: Let $1 \le p < +\infty$ and let $F$ be the set of  $f: \mathcal{X} \to [-\infty,+\infty)$ borel.
+\begin{enumerate}
+    \item Show that $C_c( \mathcal{X})$ is dense in $ L^{p}( \mathcal{X}) \cap F$
+    \item Show that if we further assume that $\mu$ is Borel regular then $ C_C( \mathcal{X})$ is dense in $L^{p}( \mathcal{X})$
+\end{enumerate}
+Given $f \in L^{p}( \mathcal{X}) \cap F$
+ \[
+     \lim_{n\to \infty}||f - \sum_{i=1}^{n}a_i^{n }1_{E_i^{n}} ||_{L^{p}} = 0
+\] 
+\[
+   f\ge 0 \implies  f = \sum_{i=1}^{\infty}\frac{1}{i} 1_{S_i}
+\] 
+It suffices to show that $C_c( \mathcal{X})$ is dense in $\{\sum_{i=1}^{n}a_I 1_{e_i}: a_i \in \mathbb{R}, E_1,\dots,E_n  \mu-\text{measurable}\} \cap L^{p}$ 
+so it suffices further to show that $C_c( \mathcal{X})$ is dense in
+\[
+    \{1_E : E \subset \mathcal{X} \text{is borel}, \mu[E] < \infty\}
+\] 
+If $E$ is measurable choose  $B$ borel such that  $E \subset B$ and $\mu[E] = \mu[B]$
+
+
+\end{document}
